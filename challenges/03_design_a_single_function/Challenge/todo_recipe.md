@@ -38,7 +38,7 @@ Checks if one #TODO string is returned in new list
 check_to_do(["#TODO Take out rubbish", "Clean up room"]) => ["#TODO Take out rubbish"]
 
 """
-Checks if multiple #TODO strongs as returned in new list
+Checks if multiple #TODO strings as returned in new list
 """
 check_to_do(["#TODO Take out rubbish", "#TODO Clean up room", "Feed dog"]) => [["#TODO Take out rubbish", "#TODO Clean up room"]]
 
