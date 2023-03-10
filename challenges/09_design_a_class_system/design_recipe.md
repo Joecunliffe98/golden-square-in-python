@@ -129,6 +129,12 @@ Class Diary:
         # minutes: as integer
         # Returns the longest entry that the user can read from the diary list
     
+    def check_for_number(self, contacts, entry):
+        # Parameters:
+        # contacts: as class
+        # entry: as string
+        # adds phone number to contacts list if one is present
+    
 Class Contacts:
     def __init__(self):
         Create list
@@ -145,7 +151,7 @@ Class Contacts:
     
 Class 
     
-3. Create Examples as Integration Tests
+1. Create Examples as Integration Tests
 
 """
 Given a task
@@ -313,6 +319,31 @@ def test_best_entry_to_read_with_closest_word_count():
     diary.add(entry_2) 
     assert diary.find_best_entry_for_reading_time(10, 2) == entry_2
 
+"""
+Given a diary entry with a phone number in
+#adds phone number to contacts list
+"""
+def test_number_added_to_contacts_if_in_diary_entry
+    diary = Diary()
+    contacts_list = Contacts()
+    entry_1 = DiaryEntry("Todays entry 1", "Called doctors on 05647398261")
+    assert contacts_list.all() == "05647398261"
+
+"""
+Given two diary entries with phone numbers in
+#adds phone number to contacts list and returns both
+"""
+def test_multiple_numbers_added_to_contacts_if_in_diary_entry():
+    diary = Diary()
+    contacts_list = Contacts()
+    entry_1 = DiaryEntry("Todays entry 1", "Called doctors on 05647398261")
+    diary.add(entry_1)
+    entry_2 = DiaryEntry("Todays entry 1", "Called doctors on 05647398256")
+    diary.add(entry_2)
+    diary.check_for_number(contacts_list, entry_1)
+    diary.check_for_number(contacts_list, entry_2)
+    assert contacts_list.all() == ["05647398261", "05647398256"]
+
 4. Create Examples as Unit Tests
 
 """
@@ -370,6 +401,26 @@ def test_diary_entry_reading_chunk_starts_from_beginning():
     assert todays_entry.reading_chunk(4, 1) == "Lorem ipsum dolor sit"
     assert todays_entry.reading_chunk(4, 1) == "amet, consectetuer"
     assert todays_entry.reading_chunk(4, 1) == "Lorem ipsum dolor sit"
+
+"""
+Given a number
+Adds it to the contacts list
+"""
+def test_adds_to_contacts():
+    contacts_list = Contacts()
+    contacts_list.add("05637183923")
+    assert contacts_list.all() == ["05637183923"]
+
+"""
+Given multiple numbers
+Adds them to contacts list
+"""
+def test_adds_to_contacts():
+    contacts_list = Contacts()
+    contacts_list.add("05637183923")
+    contacts_list.add("06372859354")
+    assert contacts_list.all() == ["05637183923", "06372859354"]
+
 
 
 5. Implement the Behaviour
