@@ -43,3 +43,4 @@ class Diary:
             phone_number = re.findall(r"[\d]{11}", entry.contents)
             if phone_number != []:
                 contacts._contacts_list.append(phone_number[0])
+            
