@@ -59,16 +59,16 @@ class UserInterface:
     def _next_item(self):
         new_item = self._prompt("Anything else?")
         while new_item != "No":
-            if new_item == "No":
-                break
+            if new_item == "O":
+                self._show("")
+                self._show(self.order.create_receipt())
+                new_item = self._prompt("Anything else?")
             elif new_item == "M":
                 self._show("")
                 self._show(self.menu.view_menu())
                 new_item = self._prompt("Anything else?")
-            elif new_item == "O":
-                self._show("")
-                self._show(self.order.create_receipt())
-                new_item = self._prompt("Anything else?")
+            elif new_item == "No":
+                break
             else:
                 self.order.add_item_to_order(self.menu, new_item)
                 self._show("")
