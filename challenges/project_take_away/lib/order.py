@@ -2,6 +2,7 @@ from lib.menu import *
 from twilio.rest import Client      # Allows for a SMS to be sent to the customer
 from datetime import datetime       # Allows for twilio to output the current time in the text
 from datetime import timedelta      # Allows a time difference to be set
+from lib.creds import *
 
 class Order():
     def __init__(self):
@@ -9,6 +10,9 @@ class Order():
         self.menu = Menu()      # Sets menu equal to an instance of the menu class
         self.phone_number = 0
         self.name = ""
+        self.auth_token = auth_token
+        self.account_sid = account_sid
+        self.messaging_service_sid = messaging_service_sid
     
     def get_phone_number(self, number):
         self.phone_number = "+44" + number
@@ -40,13 +44,13 @@ class Order():
     def submit_order(self):
         now = datetime.now()    # Fetches the current time
         current_time = now.strftime("%H:%M")    # Formats the current time
-        account_sid = '' # twilio
-        auth_token = '' # twilio
+        account_sid = self.account_sid # twilio
+        auth_token = self.auth_token # twilio
         client = Client(account_sid, auth_token)    # twilio
         ready_time = now + timedelta(minutes=30)    # Calculates the time the order will be ready by adding 30 mins to current time
         ready_time_string = str(ready_time.strftime("%H:%M"))   # Converts the ready time into a string so it can be used in a text
         message = client.messages.create(   # Creates a text message that can be sent providing an output of the time of the order and the time it will be ready
-                            messaging_service_sid='', 
+                            messaging_service_sid=self.messaging_service_sid, 
                             body="Hi " + self.name + "! Thanks for your order placed at " + str(current_time) + ". It will be ready at " + ready_time_string + ".",      
                             to=self.phone_number
                         ) 
