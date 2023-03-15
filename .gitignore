@@ -3,3 +3,4 @@ your-project-venv
 experimental
 __pycache__
 .coverage
+challenges/project_take_away/lib/creds.py
