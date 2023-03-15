@@ -19,16 +19,24 @@ class UserInterface:
         self._show("")
         self.order.add_item_to_order(self.menu, self._prompt("What would you like to order?"))
         self._show("")
+        self._show("At anytime you can type 'M' to see the menu or 'O' to see your current order")
+        self._show("")
         new_item = self._prompt("Anything else?")
         while new_item != "No":
             if new_item == "No":
                 break
+            elif new_item == "M":
+                self._show(self.menu.view_menu())
+                new_item = self._prompt("Anything else?")
+            elif new_item == "O":
+                self._show(self.order.create_receipt())
+                new_item = self._prompt("Anything else?")
             else:
                 self.order.add_item_to_order(self.menu, new_item)
                 self._show("")
-                new_item = self._prompt("Anything else?".center(shutil.get_terminal_size().columns))
+                new_item = self._prompt("Anything else?")
         self._show(self.order.create_receipt())
-        if self._prompt("What would you like to submit this order?") == "Yes":    
+        if self._prompt("What would you like to submit this order?") == "Yes" or "Y":    
             self.order.submit_order()
             self._show("Order Submitted")
         else:
