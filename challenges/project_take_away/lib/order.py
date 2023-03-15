@@ -37,9 +37,12 @@ class Order():
         return round(total, 2)  # Rounds the grand total to 2 d.p
     
     def create_receipt(self):
-        values = [[item, *inner.values()] for item, inner in self.current_order.items()]    # Creates a list of item, quantities and prices that can be used by the tabulate method
-        values.append(["Grand Total", "-", self.grand_total()]) # Adds grand total onto the end of the current list of items   
-        return tabulate(values, headers=["Item", "Quantity", "Price"], tablefmt="fancy_outline")    # Returns a formatted itemised table of the receipt
+        if self.current_order == {}:
+            return "No items on current order"
+        else:
+            values = [[item, *inner.values()] for item, inner in self.current_order.items()]    # Creates a list of item, quantities and prices that can be used by the tabulate method
+            values.append(["Grand Total", "-", self.grand_total()]) # Adds grand total onto the end of the current list of items   
+            return tabulate(values, headers=["Item", "Quantity", "Price"], tablefmt="fancy_outline")    # Returns a formatted itemised table of the receipt
 
     def submit_order(self):
         now = datetime.now()    # Fetches the current time
