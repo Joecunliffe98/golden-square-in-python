@@ -53,7 +53,6 @@ class UserInterface:
             self._next_item()
         self.order.add_item_to_order(
             self.menu, first_item)
-        self._show("")
         self._show(first_item + " added to order successfully.")
     
     def _next_item(self):
